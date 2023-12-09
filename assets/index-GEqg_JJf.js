@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-JSPJ77Qm.js"(exports, module) {
+  "assets/index-GEqg_JJf.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -20547,15 +20547,14 @@ var require_index_001 = __commonJS({
         return new SphereGeometry(data.radius, data.widthSegments, data.heightSegments, data.phiStart, data.phiLength, data.thetaStart, data.thetaLength);
       }
     }
-    class MeshStandardMaterial extends Material {
+    class MeshPhongMaterial extends Material {
       constructor(parameters) {
         super();
-        this.isMeshStandardMaterial = true;
-        this.defines = { "STANDARD": "" };
-        this.type = "MeshStandardMaterial";
+        this.isMeshPhongMaterial = true;
+        this.type = "MeshPhongMaterial";
         this.color = new Color(16777215);
-        this.roughness = 1;
-        this.metalness = 0;
+        this.specular = new Color(1118481);
+        this.shininess = 30;
         this.map = null;
         this.lightMap = null;
         this.lightMapIntensity = 1;
@@ -20572,11 +20571,12 @@ var require_index_001 = __commonJS({
         this.displacementMap = null;
         this.displacementScale = 1;
         this.displacementBias = 0;
-        this.roughnessMap = null;
-        this.metalnessMap = null;
+        this.specularMap = null;
         this.alphaMap = null;
         this.envMap = null;
-        this.envMapIntensity = 1;
+        this.combine = MultiplyOperation;
+        this.reflectivity = 1;
+        this.refractionRatio = 0.98;
         this.wireframe = false;
         this.wireframeLinewidth = 1;
         this.wireframeLinecap = "round";
@@ -20587,10 +20587,9 @@ var require_index_001 = __commonJS({
       }
       copy(source) {
         super.copy(source);
-        this.defines = { "STANDARD": "" };
         this.color.copy(source.color);
-        this.roughness = source.roughness;
-        this.metalness = source.metalness;
+        this.specular.copy(source.specular);
+        this.shininess = source.shininess;
         this.map = source.map;
         this.lightMap = source.lightMap;
         this.lightMapIntensity = source.lightMapIntensity;
@@ -20607,11 +20606,12 @@ var require_index_001 = __commonJS({
         this.displacementMap = source.displacementMap;
         this.displacementScale = source.displacementScale;
         this.displacementBias = source.displacementBias;
-        this.roughnessMap = source.roughnessMap;
-        this.metalnessMap = source.metalnessMap;
+        this.specularMap = source.specularMap;
         this.alphaMap = source.alphaMap;
         this.envMap = source.envMap;
-        this.envMapIntensity = source.envMapIntensity;
+        this.combine = source.combine;
+        this.reflectivity = source.reflectivity;
+        this.refractionRatio = source.refractionRatio;
         this.wireframe = source.wireframe;
         this.wireframeLinewidth = source.wireframeLinewidth;
         this.wireframeLinecap = source.wireframeLinecap;
@@ -22172,15 +22172,16 @@ var require_index_001 = __commonJS({
       });
     }
     function createPlanet(size, texturePath, position, ring, isSun = true) {
-      const geometry = new SphereGeometry(size, 500, 500);
-      const texture = new TextureLoader().load(texturePath);
+      const geometry = new SphereGeometry(size, 1e3, 1e3);
+      const textureLoader = new TextureLoader();
+      const texture = textureLoader.load(texturePath);
       texture.anisotropy = renderer.capabilities.getMaxAnisotropy() * 2;
       texture.generateMipmaps = true;
       let material;
       if (isSun) {
         material = new MeshBasicMaterial({ map: texture });
       } else {
-        material = new MeshStandardMaterial({ map: texture });
+        material = new MeshPhongMaterial({ map: texture });
       }
       const planet = new Mesh(geometry, material);
       const planetObj = new Object3D();
@@ -22195,7 +22196,7 @@ var require_index_001 = __commonJS({
           30
         );
         const textureload = new TextureLoader();
-        const RingMat = new MeshStandardMaterial({
+        const RingMat = new MeshPhongMaterial({
           map: textureload.load(ring.texture),
           side: DoubleSide,
           transparent: true,
@@ -22222,6 +22223,11 @@ var require_index_001 = __commonJS({
       const orbitMaterial = new LineBasicMaterial({ color: 46079, transparent: true, opacity: 0.3 });
       const orbitLine = new Line(orbitGeometry, orbitMaterial);
       scene.add(orbitLine);
+      textureLoader.load(texturePath, (texture2) => {
+        texture2.anisotropy = renderer.capabilities.getMaxAnisotropy() * 2;
+        material.map = texture2;
+        material.needsUpdate = true;
+      });
       return { planet, planetObj, orbitLine };
     }
     function createAllPlanets() {
