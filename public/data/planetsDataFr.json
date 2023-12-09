@@ -1,0 +1,140 @@
+{
+    "planets": [
+        {
+            "planet": "Mercure",
+            "data": {
+                "superficie": "74,800,000 km²",
+                "diametre": "4,880 km",
+                "masse": "3.301 x 10^23 kg",
+                "gravite": "3.7 m/s²",
+                "temperature": {
+                    "jour": "430°C",
+                    "nuit": "-180°C"
+                },
+                "rotation": "Environ 58,6 jours terrestres",
+                "revolution": "Environ 88 jours terrestres",
+                "nombre_de_lunes": "Aucune (connue)",
+                "distance_moyenne_du_soleil": "Environ 57,91 millions de kilomètres"
+            }
+        },
+        {
+            "planet": "Vénus",
+            "data": {
+                "superficie": "460,200,000 km²",
+                "diametre": "12,104 km",
+                "masse": "4.867 x 10^24 kg",
+                "gravite": "8.87 m/s²",
+                "temperature": {
+                    "jour": "465°C",
+                    "nuit": "465°C"
+                },
+                "rotation": "Environ 243 jours terrestres",
+                "revolution": "Environ 225 jours terrestres",
+                "nombre_de_lunes": "Aucune (connue)",
+                "distance_moyenne_du_soleil": "Environ 108 millions de kilomètres"
+            }
+        },
+        {
+            "planet": "Terre",
+            "data": {
+                "superficie": "510,100,000 km²",
+                "diametre": "12,742 km",
+                "masse": "5.972 x 10^24 kg",
+                "gravite": "9.81 m/s²",
+                "temperature": {
+                    "jour": "14°C",
+                    "nuit": "-10°C to 20°C (variables)"
+                },
+                "rotation": "Environ 24 heures",
+                "revolution": "365.25 jours",
+                "nombre_de_lunes": "1 (La Lune)",
+                "distance_moyenne_du_soleil": "Environ 150 millions de kilomètres"
+            }
+        },
+        {
+            "planet": "Mars",
+            "data": {
+                "superficie": "144,800,000 km²",
+                "diametre": "6,779 km",
+                "masse": "6.417 x 10^23 kg",
+                "gravite": "3.7 m/s²",
+                "temperature": {
+                    "jour": "-28°C",
+                    "nuit": "-78°C"
+                },
+                "rotation": "Environ 24.6 heures",
+                "revolution": "Environ 687 jours terrestres",
+                "nombre_de_lunes": "2 (Phobos et Deimos)",
+                "distance_moyenne_du_soleil": "Environ 228 millions de kilomètres"
+            }
+        },
+        {
+            "planet": "Jupiter",
+            "data": {
+                "superficie": "61,420,000,000 km²",
+                "diametre": "139,820 km",
+                "masse": "1.899 x 10^27 kg",
+                "gravite": "24.79 m/s²",
+                "temperature": {
+                    "jour": "-145°C",
+                    "nuit": "-145°C"
+                },
+                "rotation": "Environ 9.8 heures",
+                "revolution": "Environ 11.9 années terrestres",
+                "nombre_de_lunes": "79 connues (dont les 4 grandes lunes : Io, Europe, Ganymède, Callisto)",
+                "distance_moyenne_du_soleil": "Environ 778 millions de kilomètres"
+            }
+        },
+        {
+            "planet": "Saturne",
+            "data": {
+                "superficie": "42,700,000,000 km²",
+                "diametre": "116,460 km",
+                "masse": "5.683 x 10^26 kg",
+                "gravite": "10.44 m/s²",
+                "temperature": {
+                    "jour": "-178°C",
+                    "nuit": "-178°C"
+                },
+                "rotation": "Environ 10.5 heures",
+                "revolution": "Environ 29.5 années terrestres",
+                "nombre_de_lunes": "83 connues (dont les célèbres anneaux)",
+                "distance_moyenne_du_soleil": "Environ 1.429 milliards de kilomètres"
+            }
+        },
+        {
+            "planet": "Uranus",
+            "data": {
+                "superficie": "8,115,600,000 km²",
+                "diametre": "50,724 km",
+                "masse": "8.681 x 10^25 kg",
+                "gravite": "8.69 m/s²",
+                "temperature": {
+                    "jour": "-224°C",
+                    "nuit": "-224°C"
+                },
+                "rotation": "Environ 17.2 heures",
+                "revolution": "Environ 84 années terrestres",
+                "nombre_de_lunes": "27 connues",
+                "distance_moyenne_du_soleil": "Environ 2.871 milliards de kilomètres"
+            }
+        },
+        {
+            "planet": "Neptune",
+            "data": {
+                "superficie": "7,618,300,000 km²",
+                "diametre": "49,244 km",
+                "masse": "1.024 x 10^26 kg",
+                "gravite": "11.15 m/s²",
+                "temperature": {
+                    "jour": "-218°C",
+                    "nuit": "-218°C"
+                },
+                "rotation": "Environ 16.1 heures",
+                "revolution": "Environ 164.8 années terrestres",
+                "nombre_de_lunes": "14 connues",
+                "distance_moyenne_du_soleil": "Environ 4.498 milliards de kilomètres"
+            }
+        }
+    ]
+}

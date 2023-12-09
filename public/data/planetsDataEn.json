@@ -1,0 +1,130 @@
+{
+    "planets": [
+        {
+            "Sun": {
+                "SURFACE": "6.09 x 10^12 km²",
+                "DIAMETER": "1.391 x 10^6 km",
+                "MASS": "1.989 x 10^27 tons",
+                "GRAVITY": "274 m/s²",
+                "TEMPERATURE CORE": "15 million °C",
+                "TEMPERATURE SURFACE": "5,500 °C",
+                "ROTATION": "25 days",
+                "REVOLUTION": "225-250 x 10^6 years",
+                "MOONS": "None",
+                "FROM GALACTIC CENTER": "2.5546 x 10^20 km"
+            }
+        },
+        {
+            "Mercury": {
+                "SURFACE": "7.48 x 10^7 km²",
+                "DIAMETER": "4.880 km",
+                "MASS": "3.301 x 10^20 tons",
+                "GRAVITY": "3.7 m/s²",
+                "TEMPERATURE DAY": "430°C",
+                "TEMPERATURE NIGHT": "-180°C",
+                "ROTATION": "58.6 Earth days",
+                "REVOLUTION": "88 Earth days",
+                "MOONS": "None",
+                "DISTANCE FROM SUN": "5.791 x 10^7 km"
+            }
+        },
+        {
+            "Venus": {
+                "SURFACE": "4.602 x 10^8 km²",
+                "DIAMETER": "12.104 km",
+                "MASS": "4.867 x 10^21 tons",
+                "GRAVITY": "8.87 m/s²",
+                "TEMPERATURE DAY": "465°C",
+                "TEMPERATURE NIGHT": "465°C",
+                "ROTATION": "243 Earth days",
+                "REVOLUTION": "225 Earth days",
+                "MOONS": "None",
+                "DISTANCE FROM SUN": "1.08 x 10^8 km"
+            }
+        },
+        {
+            "Earth": {
+                "SURFACE": "5.101 x 10^8 km²",
+                "DIAMETER": "12.742 km",
+                "MASS": "5.972 x 10^21 tons",
+                "GRAVITY": "9.81 m/s²",
+                "TEMPERATURE DAY": "15°C",
+                "TEMPERATURE NIGHT": "-10°C to 20°C",
+                "ROTATION": "24 hours",
+                "REVOLUTION": "365.25 days",
+                "MOONS": "1",
+                "DISTANCE FROM SUN": "1.5 x 10^8 km"
+            }
+        },
+        {
+            "Mars": {
+                "SURFACE": "1.448 x 10^8 km²",
+                "DIAMETER": "6.779 km",
+                "MASS": "6.417 x 10^20 tons",
+                "GRAVITY": "3.7 m/s²",
+                "TEMPERATURE DAY": "-28°C",
+                "TEMPERATURE NIGHT": "-78°C",
+                "ROTATION": "24.6 hours",
+                "REVOLUTION": "687 Earth days",
+                "MOONS": "2",
+                "DISTANCE FROM SUN": "2.28 x 10^8 km"
+            }
+        },
+        {
+            "Jupiter": {
+                "SURFACE": "6.142 x 10^10 km²",
+                "DIAMETER": "139.820 km",
+                "MASS": "1.899 x 10^24 tons",
+                "GRAVITY": "24.79 m/s²",
+                "TEMPERATURE DAY": "-145°C",
+                "TEMPERATURE NIGHT": "-145°C",
+                "ROTATION": "9.8 hours",
+                "REVOLUTION": "11.9 Earth years",
+                "MOONS": "79 known",
+                "DISTANCE FROM SUN": "7.78 x 10^8 km"
+            }
+        },
+        {
+            "Saturn": {
+                "SURFACE": "4.27 x 10^10 km²",
+                "DIAMETER": "116.460 km",
+                "MASS": "5.683 x 10^23 tons",
+                "GRAVITY": "10.44 m/s²",
+                "TEMPERATURE DAY": "-178°C",
+                "TEMPERATURE NIGHT": "-178°C",
+                "ROTATION": "10.5 hours",
+                "REVOLUTION": "29.5 Earth years",
+                "MOONS": "83 known",
+                "DISTANCE FROM SUN": "1.429 x 10^9 km"
+            }
+        },
+        {
+            "Uranus": {
+                "SURFACE": "8.1156 x 10^9 km²",
+                "DIAMETER": "50.724 km",
+                "MASS": "8.681 x 10^22 tons",
+                "GRAVITY": "8.69 m/s²",
+                "TEMPERATURE DAY": "-224°C",
+                "TEMPERATURE NIGHT": "-224°C",
+                "ROTATION": "17.2 hours",
+                "REVOLUTION": "84 Earth years",
+                "MOONS": "27 known",
+                "DISTANCE FROM SUN": "2.871 x 10^9 km"
+            }
+        },
+        {
+            "Neptune": {
+                "SURFACE": "7.6183 x 10^9 km²",
+                "DIAMETER": "49.244 km",
+                "MASS": "1.024 x 10^23 tons",
+                "GRAVITY": "11.15 m/s²",
+                "TEMPERATURE DAY": "-218°C",
+                "TEMPERATURE NIGHT": "-218°C",
+                "ROTATION": "16.1 hours",
+                "REVOLUTION": "164.8 Earth years",
+                "MOONS": "14 known",
+                "DISTANCE FROM SUN": "4.498 x 10^9 km"
+            }
+        }
+    ]
+}
