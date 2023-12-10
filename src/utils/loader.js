@@ -16,6 +16,7 @@ JokerContainer.appendChild(presentationText)
 JokerContainer.appendChild(JokerLink)
 
 webglFluid.default(loader, {
+
     TRANSPARENT: true,
     IMMEDIATE: false,
     TRIGGER: 'click',
