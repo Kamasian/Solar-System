@@ -18,7 +18,7 @@ JokerContainer.appendChild(JokerLink)
 webglFluid.default(loader, {
     TRANSPARENT: true,
     IMMEDIATE: false,
-    TRIGGER: 'hover',
+    TRIGGER: 'click',
     SIM_RESOLUTION: 64,
     DYE_RESOLUTION: 512,
     CAPTURE_RESOLUTION: 512,

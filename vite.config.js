@@ -5,6 +5,7 @@ import path from "path"
 export default defineConfig({
     build: {
         outDir: "build",
+        minify: false,
     },
     resolve: {
         alias: {

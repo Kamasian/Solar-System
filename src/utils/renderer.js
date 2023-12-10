@@ -29,5 +29,5 @@ export function createCubeLoader(scene) {
         texturePaths.stars,
         texturePaths.stars,
         texturePaths.stars
-    ]);
+    ])
 }

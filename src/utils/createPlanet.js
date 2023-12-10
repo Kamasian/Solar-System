@@ -1,42 +1,44 @@
-import * as THREE from 'three'
-import { renderer, scene } from '../../main.js'
-import texturePaths from './textures.js'
+import * as THREE from 'three';
+import { renderer, scene } from '../../main.js';
+import texturePaths from './textures.js';
 
 export function createPlanet(size, texturePath, position, ring, isSun = true) {
-    const geometry = new THREE.SphereGeometry(size, 500, 500)
-    const texture = new THREE.TextureLoader().load(texturePath)
+    const geometry = new THREE.SphereGeometry(size, 1000, 1000);
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load(texturePath);
 
-    texture.anisotropy = renderer.capabilities.getMaxAnisotropy() * 2
-    texture.generateMipmaps = true
+    texture.anisotropy = renderer.capabilities.getMaxAnisotropy() * 2;
+    texture.generateMipmaps = true;
 
-    let material
+    let material;
     if (isSun) {
-        material = new THREE.MeshBasicMaterial({ map: texture })
+        material = new THREE.MeshBasicMaterial({ map: texture });
     } else {
-        material = new THREE.MeshStandardMaterial({ map: texture })
+        material = new THREE.MeshPhongMaterial({ map: texture });
     }
 
-    const planet = new THREE.Mesh(geometry, material)
-    const planetObj = new THREE.Object3D()
-    planetObj.add(planet)
-    scene.add(planetObj)
-    planet.position.x = position
+    const planet = new THREE.Mesh(geometry, material);
+    const planetObj = new THREE.Object3D();
+    planetObj.add(planet);
+    scene.add(planetObj);
+    planet.position.x = position;
+
     if (ring) {
         const RingGeo = new THREE.RingGeometry(
             ring.innerRadius, ring.outerRadius, 100, 30
-        )
-        const textureload = new THREE.TextureLoader()
-        const RingMat = new THREE.MeshStandardMaterial({
+        );
+        const textureload = new THREE.TextureLoader();
+        const RingMat = new THREE.MeshPhongMaterial({
             map: textureload.load(ring.texture),
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.8
-        })
+        });
 
-        const Ring = new THREE.Mesh(RingGeo, RingMat)
-        planetObj.add(Ring)
-        Ring.position.x = position
-        Ring.rotation.x = -0.5 * Math.PI
+        const Ring = new THREE.Mesh(RingGeo, RingMat);
+        planetObj.add(Ring);
+        Ring.position.x = position;
+        Ring.rotation.x = -0.5 * Math.PI;
     }
 
     const orbit = new THREE.EllipseCurve(
@@ -45,18 +47,24 @@ export function createPlanet(size, texturePath, position, ring, isSun = true) {
         0, 2 * Math.PI,
         false,
         0
-    )
+    );
 
-    const orbitPoints = orbit.getPoints(200)
-    const orbitGeometry = new THREE.BufferGeometry().setFromPoints(orbitPoints)
+    const orbitPoints = orbit.getPoints(200);
+    const orbitGeometry = new THREE.BufferGeometry().setFromPoints(orbitPoints);
 
-    orbitGeometry.rotateX(Math.PI / 2)
+    orbitGeometry.rotateX(Math.PI / 2);
 
-    const orbitMaterial = new THREE.LineBasicMaterial({ color: 0x00b3ff, transparent: true, opacity: 0.3 })
-    const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial)
-    scene.add(orbitLine)
+    const orbitMaterial = new THREE.LineBasicMaterial({ color: 0x00b3ff, transparent: true, opacity: 0.3 });
+    const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial);
+    scene.add(orbitLine);
 
-    return { planet, planetObj, orbitLine }
+    textureLoader.load(texturePath, (texture) => {
+        texture.anisotropy = renderer.capabilities.getMaxAnisotropy() * 2;
+        material.map = texture;
+        material.needsUpdate = true;
+    });
+
+    return { planet, planetObj, orbitLine };
 }
 
 export default function createAllPlanets() {
@@ -74,5 +82,5 @@ export default function createAllPlanets() {
         }, false),
         uranus: createPlanet(10.40, texturePaths.uranus, 658.02, null, false),
         neptune: createPlanet(10.09, texturePaths.neptune, 992.69, null, false)
-    }
+    };
 }

@@ -6,6 +6,6 @@ const hudImagePaths = [
     '/assets/img/hud/hud6.png',
     '/assets/img/hud/hud7.png',
     '/assets/img/hud/hud8.png'
-];
+]
 
 export default hudImagePaths
