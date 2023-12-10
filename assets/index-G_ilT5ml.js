@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-5tsPLHWp.js"(exports, module) {
+  "assets/index-G_ilT5ml.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -1009,6 +1009,847 @@ var require_index_001 = __commonJS({
       var Ge = { Color: E, math: pe, interpret: we }, Xe = { Controller: x, BooleanController: se, OptionController: Ne, StringController: Be, NumberController: oe, NumberControllerBox: le, NumberControllerSlider: ue, FunctionController: Ae, ColorController: ve }, H = { dom: l }, De = { GUI: C }, Ve = C, Ye = { color: Ge, controllers: Xe, dom: H, gui: De, GUI: Ve };
       V.color = Ge, V.controllers = Xe, V.dom = H, V.gui = De, V.GUI = Ve, V.default = Ye, Object.defineProperty(V, "__esModule", { value: true });
     });
+    function dt(V, p) {
+      const D = V;
+      h(), p = {
+        IMMEDIATE: true,
+        TRIGGER: "hover",
+        SIM_RESOLUTION: 128,
+        DYE_RESOLUTION: 1024,
+        CAPTURE_RESOLUTION: 512,
+        DENSITY_DISSIPATION: 1,
+        VELOCITY_DISSIPATION: 0.2,
+        PRESSURE: 0.8,
+        PRESSURE_ITERATIONS: 20,
+        CURL: 30,
+        SPLAT_RADIUS: 0.25,
+        SPLAT_FORCE: 6e3,
+        SPLAT_COUNT: parseInt(Math.random() * 20) + 5,
+        SHADING: true,
+        COLORFUL: true,
+        COLOR_UPDATE_SPEED: 10,
+        PAUSED: false,
+        BACK_COLOR: { r: 0, g: 0, b: 0 },
+        TRANSPARENT: false,
+        BLOOM: true,
+        BLOOM_ITERATIONS: 8,
+        BLOOM_RESOLUTION: 256,
+        BLOOM_INTENSITY: 0.8,
+        BLOOM_THRESHOLD: 0.6,
+        BLOOM_SOFT_KNEE: 0.7,
+        SUNRAYS: true,
+        SUNRAYS_RESOLUTION: 196,
+        SUNRAYS_WEIGHT: 1,
+        ...p
+      };
+      function he() {
+        this.id = -1, this.texcoordX = 0, this.texcoordY = 0, this.prevTexcoordX = 0, this.prevTexcoordY = 0, this.deltaX = 0, this.deltaY = 0, this.down = false, this.moved = false, this.color = [30, 0, 300];
+      }
+      let B = [], ye = [], te = [];
+      B.push(new he());
+      const { gl: r, ext: P } = Je(D);
+      Oe() && (p.DYE_RESOLUTION = 512), P.supportLinearFiltering || (p.DYE_RESOLUTION = 512, p.SHADING = false, p.BLOOM = false, p.SUNRAYS = false);
+      function Je(o) {
+        const s = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
+        let a = o.getContext("webgl2", s);
+        const f = !!a;
+        f || (a = o.getContext("webgl", s) || o.getContext("experimental-webgl", s));
+        let _, w;
+        f ? (a.getExtension("EXT_color_buffer_float"), w = a.getExtension("OES_texture_float_linear")) : (_ = a.getExtension("OES_texture_half_float"), w = a.getExtension("OES_texture_half_float_linear")), a.clearColor(0, 0, 0, 1);
+        const y = f ? a.HALF_FLOAT : _.HALF_FLOAT_OES;
+        let L, O, ee;
+        return f ? (L = G(a, a.RGBA16F, a.RGBA, y), O = G(a, a.RG16F, a.RG, y), ee = G(a, a.R16F, a.RED, y)) : (L = G(a, a.RGBA, a.RGBA, y), O = G(a, a.RGBA, a.RGBA, y), ee = G(a, a.RGBA, a.RGBA, y)), {
+          gl: a,
+          ext: {
+            formatRGBA: L,
+            formatRG: O,
+            formatR: ee,
+            halfFloatTexType: y,
+            supportLinearFiltering: w
+          }
+        };
+      }
+      function G(o, s, a, f) {
+        if (!Ue(o, s, a, f))
+          switch (s) {
+            case o.R16F:
+              return G(o, o.RG16F, o.RG, f);
+            case o.RG16F:
+              return G(o, o.RGBA16F, o.RGBA, f);
+            default:
+              return null;
+          }
+        return {
+          internalFormat: s,
+          format: a
+        };
+      }
+      function Ue(o, s, a, f) {
+        let _ = o.createTexture();
+        o.bindTexture(o.TEXTURE_2D, _), o.texParameteri(o.TEXTURE_2D, o.TEXTURE_MIN_FILTER, o.NEAREST), o.texParameteri(o.TEXTURE_2D, o.TEXTURE_MAG_FILTER, o.NEAREST), o.texParameteri(o.TEXTURE_2D, o.TEXTURE_WRAP_S, o.CLAMP_TO_EDGE), o.texParameteri(o.TEXTURE_2D, o.TEXTURE_WRAP_T, o.CLAMP_TO_EDGE), o.texImage2D(o.TEXTURE_2D, 0, s, 4, 4, 0, a, f, null);
+        let w = o.createFramebuffer();
+        return o.bindFramebuffer(o.FRAMEBUFFER, w), o.framebufferTexture2D(o.FRAMEBUFFER, o.COLOR_ATTACHMENT0, o.TEXTURE_2D, _, 0), o.checkFramebufferStatus(o.FRAMEBUFFER) == o.FRAMEBUFFER_COMPLETE;
+      }
+      function Oe() {
+        return /Mobi|Android/i.test(navigator.userAgent);
+      }
+      class Qe {
+        constructor(s, a) {
+          this.vertexShader = s, this.fragmentShaderSource = a, this.programs = [], this.activeProgram = null, this.uniforms = [];
+        }
+        setKeywords(s) {
+          let a = 0;
+          for (let _ = 0; _ < s.length; _++)
+            a += ct(s[_]);
+          let f = this.programs[a];
+          if (f == null) {
+            let _ = N(r.FRAGMENT_SHADER, this.fragmentShaderSource, s);
+            f = ae(this.vertexShader, _), this.programs[a] = f;
+          }
+          f != this.activeProgram && (this.uniforms = ie(f), this.activeProgram = f);
+        }
+        bind() {
+          r.useProgram(this.activeProgram);
+        }
+      }
+      class k {
+        constructor(s, a) {
+          this.uniforms = {}, this.program = ae(s, a), this.uniforms = ie(this.program);
+        }
+        bind() {
+          r.useProgram(this.program);
+        }
+      }
+      function ae(o, s) {
+        let a = r.createProgram();
+        if (r.attachShader(a, o), r.attachShader(a, s), r.linkProgram(a), !r.getProgramParameter(a, r.LINK_STATUS))
+          throw r.getProgramInfoLog(a);
+        return a;
+      }
+      function ie(o) {
+        let s = [], a = r.getProgramParameter(o, r.ACTIVE_UNIFORMS);
+        for (let f = 0; f < a; f++) {
+          let _ = r.getActiveUniform(o, f).name;
+          s[_] = r.getUniformLocation(o, _);
+        }
+        return s;
+      }
+      function N(o, s, a) {
+        s = Pe(s, a);
+        const f = r.createShader(o);
+        if (r.shaderSource(f, s), r.compileShader(f), !r.getShaderParameter(f, r.COMPILE_STATUS))
+          throw r.getShaderInfoLog(f);
+        return f;
+      }
+      function Pe(o, s) {
+        if (s == null)
+          return o;
+        let a = "";
+        return s.forEach((f) => {
+          a += "#define " + f + `
+`;
+        }), a + o;
+      }
+      const U = N(r.VERTEX_SHADER, `
+    precision highp float;
+    attribute vec2 aPosition;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform vec2 texelSize;
+    void main () {
+        vUv = aPosition * 0.5 + 0.5;
+        vL = vUv - vec2(texelSize.x, 0.0);
+        vR = vUv + vec2(texelSize.x, 0.0);
+        vT = vUv + vec2(0.0, texelSize.y);
+        vB = vUv - vec2(0.0, texelSize.y);
+        gl_Position = vec4(aPosition, 0.0, 1.0);
+    }
+`), qe = N(r.VERTEX_SHADER, `
+    precision highp float;
+    attribute vec2 aPosition;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    uniform vec2 texelSize;
+    void main () {
+        vUv = aPosition * 0.5 + 0.5;
+        float offset = 1.33333333;
+        vL = vUv - texelSize * offset;
+        vR = vUv + texelSize * offset;
+        gl_Position = vec4(aPosition, 0.0, 1.0);
+    }
+`), Le = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    uniform sampler2D uTexture;
+    void main () {
+        vec4 sum = texture2D(uTexture, vUv) * 0.29411764;
+        sum += texture2D(uTexture, vL) * 0.35294117;
+        sum += texture2D(uTexture, vR) * 0.35294117;
+        gl_FragColor = sum;
+    }
+`), Ee = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    uniform sampler2D uTexture;
+    void main () {
+        gl_FragColor = texture2D(uTexture, vUv);
+    }
+`), Ze = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float value;
+    void main () {
+        gl_FragColor = value * texture2D(uTexture, vUv);
+    }
+`), Ie = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    uniform vec4 color;
+    void main () {
+        gl_FragColor = color;
+    }
+`), Me = N(r.FRAGMENT_SHADER, p.TRANSPARENT ? `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float aspectRatio;
+    #define SCALE 25.0
+    void main () {
+        vec2 uv = floor(vUv * SCALE * vec2(aspectRatio, 1.0));
+        float v = mod(uv.x + uv.y, 2.0);
+        v = v * 0.1 + 0.8;
+        gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+    }
+` : `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float aspectRatio;
+    #define SCALE 25.0
+    void main () {
+        vec2 uv = floor(vUv * SCALE * vec2(aspectRatio, 1.0));
+        float v = mod(uv.x + uv.y, 2.0);
+        v = v * 0.1 + 0.8;
+        gl_FragColor = vec4(vec3(v), 1.0);
+    }
+`), me = `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform sampler2D uTexture;
+    uniform sampler2D uBloom;
+    uniform sampler2D uSunrays;
+    uniform sampler2D uDithering;
+    uniform vec2 ditherScale;
+    uniform vec2 texelSize;
+    vec3 linearToGamma (vec3 color) {
+        color = max(color, vec3(0));
+        return max(1.055 * pow(color, vec3(0.416666667)) - 0.055, vec3(0));
+    }
+    void main () {
+        vec3 c = texture2D(uTexture, vUv).rgb;
+    #ifdef SHADING
+        vec3 lc = texture2D(uTexture, vL).rgb;
+        vec3 rc = texture2D(uTexture, vR).rgb;
+        vec3 tc = texture2D(uTexture, vT).rgb;
+        vec3 bc = texture2D(uTexture, vB).rgb;
+        float dx = length(rc) - length(lc);
+        float dy = length(tc) - length(bc);
+        vec3 n = normalize(vec3(dx, dy, length(texelSize)));
+        vec3 l = vec3(0.0, 0.0, 1.0);
+        float diffuse = clamp(dot(n, l) + 0.7, 0.7, 1.0);
+        c *= diffuse;
+    #endif
+    #ifdef BLOOM
+        vec3 bloom = texture2D(uBloom, vUv).rgb;
+    #endif
+    #ifdef SUNRAYS
+        float sunrays = texture2D(uSunrays, vUv).r;
+        c *= sunrays;
+    #ifdef BLOOM
+        bloom *= sunrays;
+    #endif
+    #endif
+    #ifdef BLOOM
+        float noise = texture2D(uDithering, vUv * ditherScale).r;
+        noise = noise * 2.0 - 1.0;
+        bloom += noise / 255.0;
+        bloom = linearToGamma(bloom);
+        c += bloom;
+    #endif
+        float a = max(c.r, max(c.g, c.b));
+        gl_FragColor = vec4(c, a);
+    }
+`, d = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform vec3 curve;
+    uniform float threshold;
+    void main () {
+        vec3 c = texture2D(uTexture, vUv).rgb;
+        float br = max(c.r, max(c.g, c.b));
+        float rq = clamp(br - curve.x, 0.0, curve.y);
+        rq = curve.z * rq * rq;
+        c *= max(rq, br - threshold) / max(br, 0.0001);
+        gl_FragColor = vec4(c, 0.0);
+    }
+`), $e = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform sampler2D uTexture;
+    void main () {
+        vec4 sum = vec4(0.0);
+        sum += texture2D(uTexture, vL);
+        sum += texture2D(uTexture, vR);
+        sum += texture2D(uTexture, vT);
+        sum += texture2D(uTexture, vB);
+        sum *= 0.25;
+        gl_FragColor = sum;
+    }
+`), _e = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform sampler2D uTexture;
+    uniform float intensity;
+    void main () {
+        vec4 sum = vec4(0.0);
+        sum += texture2D(uTexture, vL);
+        sum += texture2D(uTexture, vR);
+        sum += texture2D(uTexture, vT);
+        sum += texture2D(uTexture, vB);
+        sum *= 0.25;
+        gl_FragColor = sum * intensity;
+    }
+`), Te = N(r.FRAGMENT_SHADER, `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    void main () {
+        vec4 c = texture2D(uTexture, vUv);
+        float br = max(c.r, max(c.g, c.b));
+        c.a = 1.0 - min(max(br * 20.0, 0.0), 0.8);
+        gl_FragColor = c;
+    }
+`), we = N(r.FRAGMENT_SHADER, `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float weight;
+    #define ITERATIONS 16
+    void main () {
+        float Density = 0.3;
+        float Decay = 0.95;
+        float Exposure = 0.7;
+        vec2 coord = vUv;
+        vec2 dir = vUv - 0.5;
+        dir *= 1.0 / float(ITERATIONS) * Density;
+        float illuminationDecay = 1.0;
+        float color = texture2D(uTexture, vUv).a;
+        for (int i = 0; i < ITERATIONS; i++)
+        {
+            coord -= dir;
+            float col = texture2D(uTexture, coord).a;
+            color += col * illuminationDecay * weight;
+            illuminationDecay *= Decay;
+        }
+        gl_FragColor = vec4(color * Exposure, 0.0, 0.0, 1.0);
+    }
+`), ze = N(r.FRAGMENT_SHADER, `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTarget;
+    uniform float aspectRatio;
+    uniform vec3 color;
+    uniform vec2 point;
+    uniform float radius;
+    void main () {
+        vec2 p = vUv - point.xy;
+        p.x *= aspectRatio;
+        vec3 splat = exp(-dot(p, p) / radius) * color;
+        vec3 base = texture2D(uTarget, vUv).xyz;
+        gl_FragColor = vec4(base + splat, 1.0);
+    }
+`), pe = N(
+        r.FRAGMENT_SHADER,
+        `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uVelocity;
+    uniform sampler2D uSource;
+    uniform vec2 texelSize;
+    uniform vec2 dyeTexelSize;
+    uniform float dt;
+    uniform float dissipation;
+    vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {
+        vec2 st = uv / tsize - 0.5;
+        vec2 iuv = floor(st);
+        vec2 fuv = fract(st);
+        vec4 a = texture2D(sam, (iuv + vec2(0.5, 0.5)) * tsize);
+        vec4 b = texture2D(sam, (iuv + vec2(1.5, 0.5)) * tsize);
+        vec4 c = texture2D(sam, (iuv + vec2(0.5, 1.5)) * tsize);
+        vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+        return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);
+    }
+    void main () {
+    #ifdef MANUAL_FILTERING
+        vec2 coord = vUv - dt * bilerp(uVelocity, vUv, texelSize).xy * texelSize;
+        vec4 result = bilerp(uSource, coord, dyeTexelSize);
+    #else
+        vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
+        vec4 result = texture2D(uSource, coord);
+    #endif
+        float decay = 1.0 + dissipation * dt;
+        gl_FragColor = result / decay;
+    }`,
+        P.supportLinearFiltering ? null : ["MANUAL_FILTERING"]
+      ), et = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uVelocity;
+    void main () {
+        float L = texture2D(uVelocity, vL).x;
+        float R = texture2D(uVelocity, vR).x;
+        float T = texture2D(uVelocity, vT).y;
+        float B = texture2D(uVelocity, vB).y;
+        vec2 C = texture2D(uVelocity, vUv).xy;
+        if (vL.x < 0.0) { L = -C.x; }
+        if (vR.x > 1.0) { R = -C.x; }
+        if (vT.y > 1.0) { T = -C.y; }
+        if (vB.y < 0.0) { B = -C.y; }
+        float div = 0.5 * (R - L + T - B);
+        gl_FragColor = vec4(div, 0.0, 0.0, 1.0);
+    }
+`), M = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uVelocity;
+    void main () {
+        float L = texture2D(uVelocity, vL).y;
+        float R = texture2D(uVelocity, vR).y;
+        float T = texture2D(uVelocity, vT).x;
+        float B = texture2D(uVelocity, vB).x;
+        float vorticity = R - L - T + B;
+        gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);
+    }
+`), z = N(r.FRAGMENT_SHADER, `
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform sampler2D uVelocity;
+    uniform sampler2D uCurl;
+    uniform float curl;
+    uniform float dt;
+    void main () {
+        float L = texture2D(uCurl, vL).x;
+        float R = texture2D(uCurl, vR).x;
+        float T = texture2D(uCurl, vT).x;
+        float B = texture2D(uCurl, vB).x;
+        float C = texture2D(uCurl, vUv).x;
+        vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));
+        force /= length(force) + 0.0001;
+        force *= curl * C;
+        force.y *= -1.0;
+        vec2 vel = texture2D(uVelocity, vUv).xy;
+        gl_FragColor = vec4(vel + force * dt, 0.0, 1.0);
+    }
+`), W = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uPressure;
+    uniform sampler2D uDivergence;
+    void main () {
+        float L = texture2D(uPressure, vL).x;
+        float R = texture2D(uPressure, vR).x;
+        float T = texture2D(uPressure, vT).x;
+        float B = texture2D(uPressure, vB).x;
+        float C = texture2D(uPressure, vUv).x;
+        float divergence = texture2D(uDivergence, vUv).x;
+        float pressure = (L + R + B + T - divergence) * 0.25;
+        gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
+    }
+`), K = N(r.FRAGMENT_SHADER, `
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uPressure;
+    uniform sampler2D uVelocity;
+    void main () {
+        float L = texture2D(uPressure, vL).x;
+        float R = texture2D(uPressure, vR).x;
+        float T = texture2D(uPressure, vT).x;
+        float B = texture2D(uPressure, vB).x;
+        vec2 velocity = texture2D(uVelocity, vUv).xy;
+        velocity.xy -= vec2(R - L, T - B);
+        gl_FragColor = vec4(velocity, 0.0, 1.0);
+    }
+`), A = (() => (r.bindBuffer(r.ARRAY_BUFFER, r.createBuffer()), r.bufferData(r.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), r.STATIC_DRAW), r.bindBuffer(r.ELEMENT_ARRAY_BUFFER, r.createBuffer()), r.bufferData(r.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), r.STATIC_DRAW), r.vertexAttribPointer(0, 2, r.FLOAT, false, 0, 0), r.enableVertexAttribArray(0), (o) => {
+        r.bindFramebuffer(r.FRAMEBUFFER, o), r.drawElements(r.TRIANGLES, 6, r.UNSIGNED_SHORT, 0);
+      }))();
+      let E, x, Fe, Se, J, l, se, Ne, Be = e();
+      const oe = new k(qe, Le), le = new k(U, Ee), ue = new k(U, Ze), Ae = new k(U, Ie), ve = new k(U, Me), Re = new k(U, d), ge = new k(U, $e), Ce = new k(U, _e), He = new k(U, Te), ke = new k(U, we), Q = new k(U, ze), I = new k(U, pe), re = new k(U, et), ce = new k(U, M), ne = new k(U, z), Y = new k(U, W), de = new k(U, K), j = new Qe(U, me);
+      function C() {
+        let o = Ke(p.SIM_RESOLUTION), s = Ke(p.DYE_RESOLUTION);
+        const a = P.halfFloatTexType, f = P.formatRGBA, _ = P.formatRG, w = P.formatR, y = P.supportLinearFiltering ? r.LINEAR : r.NEAREST;
+        E == null ? E = De(s.width, s.height, f.internalFormat, f.format, a, y) : E = Ye(E, s.width, s.height, f.internalFormat, f.format, a, y), x == null ? x = De(o.width, o.height, _.internalFormat, _.format, a, y) : x = Ye(x, o.width, o.height, _.internalFormat, _.format, a, y), Fe = H(o.width, o.height, w.internalFormat, w.format, a, r.NEAREST), Se = H(o.width, o.height, w.internalFormat, w.format, a, r.NEAREST), J = De(o.width, o.height, w.internalFormat, w.format, a, r.NEAREST), Ge(), Xe();
+      }
+      function Ge() {
+        let o = Ke(p.BLOOM_RESOLUTION);
+        const s = P.halfFloatTexType, a = P.formatRGBA, f = P.supportLinearFiltering ? r.LINEAR : r.NEAREST;
+        l = H(o.width, o.height, a.internalFormat, a.format, s, f), te.length = 0;
+        for (let _ = 0; _ < p.BLOOM_ITERATIONS; _++) {
+          let w = o.width >> _ + 1, y = o.height >> _ + 1;
+          if (w < 2 || y < 2)
+            break;
+          let L = H(w, y, a.internalFormat, a.format, s, f);
+          te.push(L);
+        }
+      }
+      function Xe() {
+        let o = Ke(p.SUNRAYS_RESOLUTION);
+        const s = P.halfFloatTexType, a = P.formatR, f = P.supportLinearFiltering ? r.LINEAR : r.NEAREST;
+        se = H(o.width, o.height, a.internalFormat, a.format, s, f), Ne = H(o.width, o.height, a.internalFormat, a.format, s, f);
+      }
+      function H(o, s, a, f, _, w) {
+        r.activeTexture(r.TEXTURE0);
+        let y = r.createTexture();
+        r.bindTexture(r.TEXTURE_2D, y), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_MIN_FILTER, w), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_MAG_FILTER, w), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_WRAP_S, r.CLAMP_TO_EDGE), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_WRAP_T, r.CLAMP_TO_EDGE), r.texImage2D(r.TEXTURE_2D, 0, a, o, s, 0, f, _, null);
+        let L = r.createFramebuffer();
+        r.bindFramebuffer(r.FRAMEBUFFER, L), r.framebufferTexture2D(r.FRAMEBUFFER, r.COLOR_ATTACHMENT0, r.TEXTURE_2D, y, 0), r.viewport(0, 0, o, s), r.clear(r.COLOR_BUFFER_BIT);
+        let O = 1 / o, ee = 1 / s;
+        return {
+          texture: y,
+          fbo: L,
+          width: o,
+          height: s,
+          texelSizeX: O,
+          texelSizeY: ee,
+          attach(xe) {
+            return r.activeTexture(r.TEXTURE0 + xe), r.bindTexture(r.TEXTURE_2D, y), xe;
+          }
+        };
+      }
+      function De(o, s, a, f, _, w) {
+        let y = H(o, s, a, f, _, w), L = H(o, s, a, f, _, w);
+        return {
+          width: o,
+          height: s,
+          texelSizeX: y.texelSizeX,
+          texelSizeY: y.texelSizeY,
+          get read() {
+            return y;
+          },
+          set read(O) {
+            y = O;
+          },
+          get write() {
+            return L;
+          },
+          set write(O) {
+            L = O;
+          },
+          swap() {
+            let O = y;
+            y = L, L = O;
+          }
+        };
+      }
+      function Ve(o, s, a, f, _, w, y) {
+        let L = H(s, a, f, _, w, y);
+        return le.bind(), r.uniform1i(le.uniforms.uTexture, o.attach(0)), A(L.fbo), L;
+      }
+      function Ye(o, s, a, f, _, w, y) {
+        return o.width == s && o.height == a || (o.read = Ve(o.read, s, a, f, _, w, y), o.write = H(s, a, f, _, w, y), o.width = s, o.height = a, o.texelSizeX = 1 / s, o.texelSizeY = 1 / a), o;
+      }
+      function e(o) {
+        let s = r.createTexture();
+        r.bindTexture(r.TEXTURE_2D, s), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_MIN_FILTER, r.LINEAR), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_MAG_FILTER, r.LINEAR), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_WRAP_S, r.REPEAT), r.texParameteri(r.TEXTURE_2D, r.TEXTURE_WRAP_T, r.REPEAT), r.texImage2D(r.TEXTURE_2D, 0, r.RGB, 1, 1, 0, r.RGB, r.UNSIGNED_BYTE, new Uint8Array([255, 255, 255]));
+        let a = {
+          texture: s,
+          width: 1,
+          height: 1,
+          attach(_) {
+            return r.activeTexture(r.TEXTURE0 + _), r.bindTexture(r.TEXTURE_2D, s), _;
+          }
+        }, f = new Image();
+        return f.onload = () => {
+          a.width = f.width, a.height = f.height, r.bindTexture(r.TEXTURE_2D, s), r.texImage2D(r.TEXTURE_2D, 0, r.RGB, r.RGB, r.UNSIGNED_BYTE, f);
+        }, f.src = o, a;
+      }
+      function t() {
+        let o = [];
+        p.SHADING && o.push("SHADING"), p.BLOOM && o.push("BLOOM"), p.SUNRAYS && o.push("SUNRAYS"), j.setKeywords(o);
+      }
+      t(), C(), p.IMMEDIATE && je(p.SPLAT_COUNT);
+      let i = Date.now(), n = 0;
+      u();
+      function u() {
+        const o = c();
+        h() && C(), g(o), b(), p.PAUSED || v(o), S(null), requestAnimationFrame(u);
+      }
+      function c() {
+        let o = Date.now(), s = (o - i) / 1e3;
+        return s = Math.min(s, 0.016666), i = o, s;
+      }
+      function h() {
+        let o = $(D.clientWidth), s = $(D.clientHeight);
+        return D.width != o || D.height != s ? (D.width = o, D.height = s, true) : false;
+      }
+      function g(o) {
+        p.COLORFUL && (n += o * p.COLOR_UPDATE_SPEED, n >= 1 && (n = lt(n, 0, 1), B.forEach((s) => {
+          s.color = tt();
+        })));
+      }
+      function b() {
+        ye.length > 0 && je(ye.pop()), B.forEach((o) => {
+          o.moved && (o.moved = false, Z(o));
+        });
+      }
+      function v(o) {
+        r.disable(r.BLEND), r.viewport(0, 0, x.width, x.height), ce.bind(), r.uniform2f(ce.uniforms.texelSize, x.texelSizeX, x.texelSizeY), r.uniform1i(ce.uniforms.uVelocity, x.read.attach(0)), A(Se.fbo), ne.bind(), r.uniform2f(ne.uniforms.texelSize, x.texelSizeX, x.texelSizeY), r.uniform1i(ne.uniforms.uVelocity, x.read.attach(0)), r.uniform1i(ne.uniforms.uCurl, Se.attach(1)), r.uniform1f(ne.uniforms.curl, p.CURL), r.uniform1f(ne.uniforms.dt, o), A(x.write.fbo), x.swap(), re.bind(), r.uniform2f(re.uniforms.texelSize, x.texelSizeX, x.texelSizeY), r.uniform1i(re.uniforms.uVelocity, x.read.attach(0)), A(Fe.fbo), ue.bind(), r.uniform1i(ue.uniforms.uTexture, J.read.attach(0)), r.uniform1f(ue.uniforms.value, p.PRESSURE), A(J.write.fbo), J.swap(), Y.bind(), r.uniform2f(Y.uniforms.texelSize, x.texelSizeX, x.texelSizeY), r.uniform1i(Y.uniforms.uDivergence, Fe.attach(0));
+        for (let a = 0; a < p.PRESSURE_ITERATIONS; a++)
+          r.uniform1i(Y.uniforms.uPressure, J.read.attach(1)), A(J.write.fbo), J.swap();
+        de.bind(), r.uniform2f(de.uniforms.texelSize, x.texelSizeX, x.texelSizeY), r.uniform1i(de.uniforms.uPressure, J.read.attach(0)), r.uniform1i(de.uniforms.uVelocity, x.read.attach(1)), A(x.write.fbo), x.swap(), I.bind(), r.uniform2f(I.uniforms.texelSize, x.texelSizeX, x.texelSizeY), P.supportLinearFiltering || r.uniform2f(I.uniforms.dyeTexelSize, x.texelSizeX, x.texelSizeY);
+        let s = x.read.attach(0);
+        r.uniform1i(I.uniforms.uVelocity, s), r.uniform1i(I.uniforms.uSource, s), r.uniform1f(I.uniforms.dt, o), r.uniform1f(I.uniforms.dissipation, p.VELOCITY_DISSIPATION), A(x.write.fbo), x.swap(), r.viewport(0, 0, E.width, E.height), P.supportLinearFiltering || r.uniform2f(I.uniforms.dyeTexelSize, E.texelSizeX, E.texelSizeY), r.uniform1i(I.uniforms.uVelocity, x.read.attach(0)), r.uniform1i(I.uniforms.uSource, E.read.attach(1)), r.uniform1f(I.uniforms.dissipation, p.DENSITY_DISSIPATION), A(E.write.fbo), E.swap();
+      }
+      function S(o) {
+        p.BLOOM && q(E.read, l), p.SUNRAYS && (F(E.read, E.write, se), X(se, Ne, 1)), o == null || !p.TRANSPARENT ? (r.blendFunc(r.ONE, r.ONE_MINUS_SRC_ALPHA), r.enable(r.BLEND)) : r.disable(r.BLEND);
+        let s = o == null ? r.drawingBufferWidth : o.width, a = o == null ? r.drawingBufferHeight : o.height;
+        r.viewport(0, 0, s, a);
+        let f = o == null ? null : o.fbo;
+        p.TRANSPARENT || T(f, st(p.BACK_COLOR)), o == null && p.TRANSPARENT && m(f), R(f, s, a);
+      }
+      function T(o, s) {
+        Ae.bind(), r.uniform4f(Ae.uniforms.color, s.r, s.g, s.b, 1), A(o);
+      }
+      function m(o) {
+        ve.bind(), r.uniform1f(ve.uniforms.aspectRatio, D.width / D.height), A(o);
+      }
+      function R(o, s, a) {
+        if (j.bind(), p.SHADING && r.uniform2f(j.uniforms.texelSize, 1 / s, 1 / a), r.uniform1i(j.uniforms.uTexture, E.read.attach(0)), p.BLOOM) {
+          r.uniform1i(j.uniforms.uBloom, l.attach(1)), r.uniform1i(j.uniforms.uDithering, Be.attach(2));
+          let f = ut(Be, s, a);
+          r.uniform2f(j.uniforms.ditherScale, f.x, f.y);
+        }
+        p.SUNRAYS && r.uniform1i(j.uniforms.uSunrays, se.attach(3)), A(o);
+      }
+      function q(o, s) {
+        if (te.length < 2)
+          return;
+        let a = s;
+        r.disable(r.BLEND), Re.bind();
+        let f = p.BLOOM_THRESHOLD * p.BLOOM_SOFT_KNEE + 1e-4, _ = p.BLOOM_THRESHOLD - f, w = f * 2, y = 0.25 / f;
+        r.uniform3f(Re.uniforms.curve, _, w, y), r.uniform1f(Re.uniforms.threshold, p.BLOOM_THRESHOLD), r.uniform1i(Re.uniforms.uTexture, o.attach(0)), r.viewport(0, 0, a.width, a.height), A(a.fbo), ge.bind();
+        for (let L = 0; L < te.length; L++) {
+          let O = te[L];
+          r.uniform2f(ge.uniforms.texelSize, a.texelSizeX, a.texelSizeY), r.uniform1i(ge.uniforms.uTexture, a.attach(0)), r.viewport(0, 0, O.width, O.height), A(O.fbo), a = O;
+        }
+        r.blendFunc(r.ONE, r.ONE), r.enable(r.BLEND);
+        for (let L = te.length - 2; L >= 0; L--) {
+          let O = te[L];
+          r.uniform2f(ge.uniforms.texelSize, a.texelSizeX, a.texelSizeY), r.uniform1i(ge.uniforms.uTexture, a.attach(0)), r.viewport(0, 0, O.width, O.height), A(O.fbo), a = O;
+        }
+        r.disable(r.BLEND), Ce.bind(), r.uniform2f(Ce.uniforms.texelSize, a.texelSizeX, a.texelSizeY), r.uniform1i(Ce.uniforms.uTexture, a.attach(0)), r.uniform1f(Ce.uniforms.intensity, p.BLOOM_INTENSITY), r.viewport(0, 0, s.width, s.height), A(s.fbo);
+      }
+      function F(o, s, a) {
+        r.disable(r.BLEND), He.bind(), r.uniform1i(He.uniforms.uTexture, o.attach(0)), r.viewport(0, 0, s.width, s.height), A(s.fbo), ke.bind(), r.uniform1f(ke.uniforms.weight, p.SUNRAYS_WEIGHT), r.uniform1i(ke.uniforms.uTexture, s.attach(0)), r.viewport(0, 0, a.width, a.height), A(a.fbo);
+      }
+      function X(o, s, a) {
+        oe.bind();
+        for (let f = 0; f < a; f++)
+          r.uniform2f(oe.uniforms.texelSize, o.texelSizeX, 0), r.uniform1i(oe.uniforms.uTexture, o.attach(0)), A(s.fbo), r.uniform2f(oe.uniforms.texelSize, 0, o.texelSizeY), r.uniform1i(oe.uniforms.uTexture, s.attach(0)), A(o.fbo);
+      }
+      function Z(o) {
+        let s = o.deltaX * p.SPLAT_FORCE, a = o.deltaY * p.SPLAT_FORCE;
+        We(o.texcoordX, o.texcoordY, s, a, o.color);
+      }
+      function je(o) {
+        for (let s = 0; s < o; s++) {
+          const a = tt();
+          a.r *= 10, a.g *= 10, a.b *= 10;
+          const f = Math.random(), _ = Math.random(), w = 1e3 * (Math.random() - 0.5), y = 1e3 * (Math.random() - 0.5);
+          We(f, _, w, y, a);
+        }
+      }
+      function We(o, s, a, f, _) {
+        r.viewport(0, 0, x.width, x.height), Q.bind(), r.uniform1i(Q.uniforms.uTarget, x.read.attach(0)), r.uniform1f(Q.uniforms.aspectRatio, D.width / D.height), r.uniform2f(Q.uniforms.point, o, s), r.uniform3f(Q.uniforms.color, a, f, 0), r.uniform1f(Q.uniforms.radius, be(p.SPLAT_RADIUS / 100)), A(x.write.fbo), x.swap(), r.viewport(0, 0, E.width, E.height), r.uniform1i(Q.uniforms.uTarget, E.read.attach(0)), r.uniform3f(Q.uniforms.color, _.r, _.g, _.b), A(E.write.fbo), E.swap();
+      }
+      function be(o) {
+        let s = D.width / D.height;
+        return s > 1 && (o *= s), o;
+      }
+      D.addEventListener("mousedown", (o) => {
+        let s = $(o.offsetX), a = $(o.offsetY), f = B.find((_) => _.id == -1);
+        f == null && (f = new he()), fe(f, -1, s, a);
+      }), setTimeout(() => {
+        D.addEventListener("mousemove", (o) => {
+          let s = $(o.offsetX), a = $(o.offsetY);
+          it(B[0], s, a);
+        });
+      }, 500), window.addEventListener("mouseup", () => {
+        ot(B[0]);
+      }), D.addEventListener("touchstart", (o) => {
+        o.preventDefault();
+        const s = o.targetTouches;
+        for (; s.length >= B.length; )
+          B.push(new he());
+        for (let a = 0; a < s.length; a++) {
+          let f = $(s[a].pageX), _ = $(s[a].pageY);
+          fe(B[a + 1], s[a].identifier, f, _);
+        }
+      }), D.addEventListener("touchmove", (o) => {
+        o.preventDefault();
+        const s = o.targetTouches;
+        for (let a = 0; a < s.length; a++) {
+          let f = $(s[a].pageX), _ = $(s[a].pageY);
+          it(B[a + 1], f, _);
+        }
+      }, false), window.addEventListener("touchend", (o) => {
+        const s = o.changedTouches;
+        for (let a = 0; a < s.length; a++) {
+          let f = B.find((_) => _.id == s[a].identifier);
+          ot(f);
+        }
+      }), window.addEventListener("keydown", (o) => {
+        o.code === "KeyP" && (p.PAUSED = !p.PAUSED), o.key === " " && ye.push(parseInt(Math.random() * 20) + 5);
+      });
+      function fe(o, s, a, f) {
+        o.id = s, o.down = true, o.moved = false, o.texcoordX = a / D.width, o.texcoordY = 1 - f / D.height, o.prevTexcoordX = o.texcoordX, o.prevTexcoordY = o.texcoordY, o.deltaX = 0, o.deltaY = 0, o.color = tt();
+      }
+      function it(o, s, a) {
+        p.TRIGGER === "click" && (o.moved = o.down), o.prevTexcoordX = o.texcoordX, o.prevTexcoordY = o.texcoordY, o.texcoordX = s / D.width, o.texcoordY = 1 - a / D.height, o.deltaX = rt(o.texcoordX - o.prevTexcoordX), o.deltaY = nt(o.texcoordY - o.prevTexcoordY), p.TRIGGER === "hover" && (o.moved = Math.abs(o.deltaX) > 0 || Math.abs(o.deltaY) > 0);
+      }
+      function ot(o) {
+        o.down = false;
+      }
+      function rt(o) {
+        let s = D.width / D.height;
+        return s < 1 && (o *= s), o;
+      }
+      function nt(o) {
+        let s = D.width / D.height;
+        return s > 1 && (o /= s), o;
+      }
+      function tt() {
+        let o = at(Math.random(), 1, 1);
+        return o.r *= 0.15, o.g *= 0.15, o.b *= 0.15, o;
+      }
+      function at(o, s, a) {
+        let f, _, w, y, L, O, ee, xe;
+        switch (y = Math.floor(o * 6), L = o * 6 - y, O = a * (1 - s), ee = a * (1 - L * s), xe = a * (1 - (1 - L) * s), y % 6) {
+          case 0:
+            f = a, _ = xe, w = O;
+            break;
+          case 1:
+            f = ee, _ = a, w = O;
+            break;
+          case 2:
+            f = O, _ = a, w = xe;
+            break;
+          case 3:
+            f = O, _ = ee, w = a;
+            break;
+          case 4:
+            f = xe, _ = O, w = a;
+            break;
+          case 5:
+            f = a, _ = O, w = ee;
+            break;
+        }
+        return {
+          r: f,
+          g: _,
+          b: w
+        };
+      }
+      function st(o) {
+        return {
+          r: o.r / 255,
+          g: o.g / 255,
+          b: o.b / 255
+        };
+      }
+      function lt(o, s, a) {
+        let f = a - s;
+        return f == 0 ? s : (o - s) % f + s;
+      }
+      function Ke(o) {
+        let s = r.drawingBufferWidth / r.drawingBufferHeight;
+        s < 1 && (s = 1 / s);
+        let a = Math.round(o), f = Math.round(o * s);
+        return r.drawingBufferWidth > r.drawingBufferHeight ? { width: f, height: a } : { width: a, height: f };
+      }
+      function ut(o, s, a) {
+        return {
+          x: s / o.width,
+          y: a / o.height
+        };
+      }
+      function $(o) {
+        let s = window.devicePixelRatio || 1;
+        return Math.floor(o * s);
+      }
+      function ct(o) {
+        if (o.length == 0)
+          return 0;
+        let s = 0;
+        for (let a = 0; a < o.length; a++)
+          s = (s << 5) - s + o.charCodeAt(a), s |= 0;
+        return s;
+      }
+    }
     const loader = document.getElementById("loader");
     const JokerContainer = document.getElementById("JokerContainer");
     const JokerPicture = document.createElement("img");
@@ -1022,7 +1863,7 @@ var require_index_001 = __commonJS({
     JokerLink.appendChild(JokerPicture);
     JokerContainer.appendChild(presentationText);
     JokerContainer.appendChild(JokerLink);
-    window["webgl-fluid"].default(getElementById("loader"), {
+    dt(loader, {
       IMMEDIATE: false,
       SIM_RESOLUTION: 128,
       DYE_RESOLUTION: 1024,
@@ -1289,8 +2130,8 @@ var require_index_001 = __commonJS({
     function lerp(x, y, t) {
       return (1 - t) * x + t * y;
     }
-    function damp(x, y, lambda, dt) {
-      return lerp(x, y, 1 - Math.exp(-lambda * dt));
+    function damp(x, y, lambda, dt2) {
+      return lerp(x, y, 1 - Math.exp(-lambda * dt2));
     }
     function pingpong(x, length = 1) {
       return length - Math.abs(euclideanModulo(x, length * 2) - length);
@@ -21461,4 +22302,4 @@ var require_index_001 = __commonJS({
   }
 });
 export default require_index_001();
-//# sourceMappingURL=index-5tsPLHWp.js.map
+//# sourceMappingURL=index-G_ilT5ml.js.map
