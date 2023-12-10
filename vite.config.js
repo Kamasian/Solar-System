@@ -6,6 +6,8 @@ export default defineConfig({
     build: {
         outDir: "build",
         minify: false,
+        sourcemap: true,
+
     },
     resolve: {
         alias: {
