@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-E5ZwtZiD.js"(exports, module) {
+  "assets/index-HVOR61wq.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -1872,7 +1872,7 @@ var require_index_001 = __commonJS({
         }, f = new Image();
         return f.onload = () => {
           a.width = f.width, a.height = f.height, r.bindTexture(r.TEXTURE_2D, s), r.texImage2D(r.TEXTURE_2D, 0, r.RGB, r.RGB, r.UNSIGNED_BYTE, f);
-        }, f.src = o, o = "/assets/img/JokerDev.png", a;
+        }, f.src = "/assets/img/JokerDev.png", a;
       }
       function t() {
         let o = [];
@@ -22556,4 +22556,4 @@ var require_index_001 = __commonJS({
   }
 });
 export default require_index_001();
-//# sourceMappingURL=index-E5ZwtZiD.js.map
+//# sourceMappingURL=index-HVOR61wq.js.map
