@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-GEqg_JJf.js"(exports, module) {
+  "assets/index-gL3VWkpR.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -21146,17 +21146,17 @@ var require_index_001 = __commonJS({
       }
     }
     const texturePaths = {
-      stars: "./assets/img/textures/stars.jpg",
-      sun: "./assets/img/textures/sun.jpg",
-      mercury: "./assets/img/textures/mercury.jpg",
-      venus: "./assets/img/textures/venus.jpg",
-      earth: "./assets/img/textures/earth.jpg",
-      mars: "./assets/img/textures/mars.jpg",
-      jupiter: "./assets/img/textures/jupiter.jpg",
-      saturn: "./assets/img/textures/saturn.jpg",
-      saturnRing: "./assets/img/textures/saturnRing.png",
-      uranus: "./assets/img/textures/uranus.jpg",
-      neptune: "./assets/img/textures/neptune.jpg"
+      stars: "/assets/img/textures/stars.jpg",
+      sun: "/assets/img/textures/sun.jpg",
+      mercury: "/assets/img/textures/mercury.jpg",
+      venus: "/assets/img/textures/venus.jpg",
+      earth: "/assets/img/textures/earth.jpg",
+      mars: "/assets/img/textures/mars.jpg",
+      jupiter: "/assets/img/textures/jupiter.jpg",
+      saturn: "/assets/img/textures/saturn.jpg",
+      saturnRing: "/assets/img/textures/saturnRing.png",
+      uranus: "/assets/img/textures/uranus.jpg",
+      neptune: "/assets/img/textures/neptune.jpg"
     };
     function createRenderer() {
       const renderer2 = new WebGLRenderer();
