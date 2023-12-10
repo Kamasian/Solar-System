@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-PaliNFam.js"(exports, module) {
+  "assets/index-4vUoeBOQ.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -1872,7 +1872,7 @@ var require_index_001 = __commonJS({
         }, f = new Image();
         return f.onload = () => {
           a.width = f.width, a.height = f.height, r.bindTexture(r.TEXTURE_2D, s), r.texImage2D(r.TEXTURE_2D, 0, r.RGB, r.RGB, r.UNSIGNED_BYTE, f);
-        }, f.src = "/assets/img/black.png", a;
+        }, f.src = "/assets/img/black.webp", a;
       }
       function t() {
         let o = [];
@@ -1996,14 +1996,14 @@ var require_index_001 = __commonJS({
           let f = $(s[a].pageX), _ = $(s[a].pageY);
           fe(B[a + 1], s[a].identifier, f, _);
         }
-      }), D.addEventListener("touchmove", (o) => {
+      }, { passive: false }), D.addEventListener("touchmove", (o) => {
         o.preventDefault();
         const s = o.targetTouches;
         for (let a = 0; a < s.length; a++) {
           let f = $(s[a].pageX), _ = $(s[a].pageY);
           it(B[a + 1], f, _);
         }
-      }, false), window.addEventListener("touchend", (o) => {
+      }, { passive: false }), window.addEventListener("touchend", (o) => {
         const s = o.changedTouches;
         for (let a = 0; a < s.length; a++) {
           let f = B.find((_) => _.id == s[a].identifier);
@@ -2103,7 +2103,7 @@ var require_index_001 = __commonJS({
     const JokerLink = document.createElement("a");
     const presentationText = document.createElement("p");
     presentationText.innerHTML = "Solar Sytem </br></br> by </br></br>JokerDev";
-    JokerPicture.src = "/assets/img/JokerDev.png";
+    JokerPicture.src = "/assets/img/JokerDev.webp";
     JokerPicture.alt = "Joker";
     JokerLink.href = "https://github.com/Kamasian";
     JokerLink.target = "_blank";
@@ -21393,17 +21393,17 @@ var require_index_001 = __commonJS({
       }
     }
     const texturePaths = {
-      stars: "/assets/img/textures/stars.jpg",
-      sun: "/assets/img/textures/sun.jpg",
-      mercury: "/assets/img/textures/mercury.jpg",
-      venus: "/assets/img/textures/venus.jpg",
-      earth: "/assets/img/textures/earth.jpg",
-      mars: "/assets/img/textures/mars.jpg",
-      jupiter: "/assets/img/textures/jupiter.jpg",
-      saturn: "/assets/img/textures/saturn.jpg",
-      saturnRing: "/assets/img/textures/saturnRing.png",
-      uranus: "/assets/img/textures/uranus.jpg",
-      neptune: "/assets/img/textures/neptune.jpg"
+      stars: "/assets/img/textures/stars.webp",
+      sun: "/assets/img/textures/sun.webp",
+      mercury: "/assets/img/textures/mercury.webp",
+      venus: "/assets/img/textures/venus.webp",
+      earth: "/assets/img/textures/earth.webp",
+      mars: "/assets/img/textures/mars.webp",
+      jupiter: "/assets/img/textures/jupiter.webp",
+      saturn: "/assets/img/textures/saturn.webp",
+      saturnRing: "/assets/img/textures/saturnRing.webp",
+      uranus: "/assets/img/textures/uranus.webp",
+      neptune: "/assets/img/textures/neptune.webp"
     };
     function createRenderer() {
       const renderer2 = new WebGLRenderer();
@@ -22222,19 +22222,19 @@ var require_index_001 = __commonJS({
           button.dataset.planet = planetName.toLowerCase();
           const image1 = document.createElement("img");
           image1.classList.add("image1");
-          image1.src = "/assets/img/buttons/button-planet.png";
+          image1.src = "/assets/img/buttons/button-planet.webp";
           image1.alt = "";
           const image2 = document.createElement("img");
           image2.classList.add("image2");
-          image2.src = "/assets/img/buttons/button-ring.png";
+          image2.src = "/assets/img/buttons/button-ring.webp";
           image2.alt = "";
           const image3 = document.createElement("img");
           image3.classList.add("image3");
-          image3.src = "/assets/img/buttons/button-ring.png";
+          image3.src = "/assets/img/buttons/button-ring.webp";
           image3.alt = "";
           const image4 = document.createElement("img");
           image4.classList.add("image4");
-          image4.src = "/assets/img/buttons/button-ring.png";
+          image4.src = "/assets/img/buttons/button-ring.webp";
           image4.alt = "";
           const textElement = document.createElement("p");
           textElement.classList.add("planet-text");
@@ -22270,13 +22270,13 @@ var require_index_001 = __commonJS({
       }, 50);
     }
     const hudImagePaths = [
-      "/assets/img/hud/hud2.png",
-      "/assets/img/hud/hud3.png",
-      "/assets/img/hud/hud4.png",
-      "/assets/img/hud/hud5.png",
-      "/assets/img/hud/hud6.png",
-      "/assets/img/hud/hud7.png",
-      "/assets/img/hud/hud8.png"
+      "/assets/img/hud/hud2.webp",
+      "/assets/img/hud/hud3.webp",
+      "/assets/img/hud/hud4.webp",
+      "/assets/img/hud/hud5.webp",
+      "/assets/img/hud/hud6.webp",
+      "/assets/img/hud/hud7.webp",
+      "/assets/img/hud/hud8.webp"
     ];
     function typeWriterEffect(element, text, speed) {
       let i = 0;
@@ -22554,4 +22554,4 @@ var require_index_001 = __commonJS({
   }
 });
 export default require_index_001();
-//# sourceMappingURL=index-PaliNFam.js.map
+//# sourceMappingURL=index-4vUoeBOQ.js.map
