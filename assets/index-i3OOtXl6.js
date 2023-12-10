@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-G_ilT5ml.js"(exports, module) {
+  "assets/index-i3OOtXl6.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -1863,38 +1863,41 @@ var require_index_001 = __commonJS({
     JokerLink.appendChild(JokerPicture);
     JokerContainer.appendChild(presentationText);
     JokerContainer.appendChild(JokerLink);
-    dt(loader, {
-      IMMEDIATE: false,
-      SIM_RESOLUTION: 128,
-      DYE_RESOLUTION: 1024,
-      CAPTURE_RESOLUTION: 512,
-      DENSITY_DISSIPATION: 1,
-      VELOCITY_DISSIPATION: 0.2,
-      PRESSURE: 0.8,
-      PRESSURE_ITERATIONS: 20,
-      CURL: 30,
-      SPLAT_RADIUS: 0.25,
-      SPLAT_FORCE: 6e3,
-      SHADING: true,
-      COLORFUL: true,
-      COLOR_UPDATE_SPEED: 10,
-      PAUSED: true,
-      BACK_COLOR: { r: 0, g: 0, b: 0 },
-      TRANSPARENT: false,
-      BLOOM: true,
-      BLOOM_ITERATIONS: 8,
-      BLOOM_RESOLUTION: 256,
-      BLOOM_INTENSITY: 0.8,
-      BLOOM_THRESHOLD: 0.6,
-      BLOOM_SOFT_KNEE: 0.7,
-      SUNRAYS: true,
-      SUNRAYS_RESOLUTION: 196,
-      SUNRAYS_WEIGHT: 1
-    });
-    setTimeout(() => {
-      loader.classList.add("hidden");
-      JokerContainer.classList.add("hidden");
-    }, 5e3);
+    if (loader) {
+      dt(loader, {
+        TRANSPARENT: true,
+        IMMEDIATE: true,
+        TRIGGER: "hover",
+        SIM_RESOLUTION: 128,
+        DYE_RESOLUTION: 1024,
+        CAPTURE_RESOLUTION: 512,
+        DENSITY_DISSIPATION: 1,
+        VELOCITY_DISSIPATION: 1,
+        PRESSURE: 1,
+        PRESSURE_ITERATIONS: 20,
+        CURL: 30,
+        SPLAT_RADIUS: 0.25,
+        SPLAT_FORCE: 6e3,
+        SHADING: true,
+        COLORFUL: true,
+        COLOR_UPDATE_SPEED: 10,
+        PAUSED: false,
+        BACK_COLOR: {
+          r: 0,
+          g: 0,
+          b: 0
+        },
+        BLOOM: true,
+        BLOOM_ITERATIONS: 4,
+        BLOOM_RESOLUTION: 256,
+        BLOOM_INTENSITY: 0.8,
+        BLOOM_THRESHOLD: 0.6,
+        BLOOM_SOFT_KNEE: 0.7,
+        SUNRAYS: true,
+        SUNRAYS_RESOLUTION: 196,
+        SUNRAYS_WEIGHT: 1
+      });
+    }
     /**
      * @license
      * Copyright 2010-2023 Three.js Authors
@@ -22302,4 +22305,4 @@ var require_index_001 = __commonJS({
   }
 });
 export default require_index_001();
-//# sourceMappingURL=index-G_ilT5ml.js.map
+//# sourceMappingURL=index-i3OOtXl6.js.map
