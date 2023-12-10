@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-HVOR61wq.js"(exports, module) {
+  "assets/index-u3xzFzFG.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -2110,7 +2110,6 @@ var require_index_001 = __commonJS({
     JokerLink.appendChild(JokerPicture);
     JokerContainer.appendChild(presentationText);
     JokerContainer.appendChild(JokerLink);
-    console.log("Avant l'initialisation de webgl-fluid");
     dt(loader, {
       TRANSPARENT: true,
       IMMEDIATE: false,
@@ -2144,7 +2143,6 @@ var require_index_001 = __commonJS({
       SUNRAYS_RESOLUTION: 196,
       SUNRAYS_WEIGHT: 1
     });
-    console.log("apres l'initialisation de webgl-fluid");
     setTimeout(() => {
       loader.classList.add("hidden");
       JokerContainer.classList.add("hidden");
@@ -22556,4 +22554,4 @@ var require_index_001 = __commonJS({
   }
 });
 export default require_index_001();
-//# sourceMappingURL=index-HVOR61wq.js.map
+//# sourceMappingURL=index-u3xzFzFG.js.map
