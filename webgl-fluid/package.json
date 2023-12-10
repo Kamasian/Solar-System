@@ -1,0 +1,63 @@
+{
+  "name": "webgl-fluid",
+  "PascalCasedName": "WebGLFluid",
+  "version": "0.3.4",
+  "private": false,
+  "description": "ES Module support for https://github.com/PavelDoGreat/WebGL-Fluid-Simulation.",
+  "author": "Cloyd Lau",
+  "license": "MIT",
+  "repository": "https://github.com/cloydlau/webgl-fluid",
+  "keywords": [
+    "background",
+    "fluid",
+    "gpu",
+    "navier-stokes",
+    "simulation",
+    "webgl"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/webgl-fluid.mjs",
+      "require": "./dist/webgl-fluid.umd.js"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/webgl-fluid.umd.js",
+  "module": "./dist/webgl-fluid.mjs",
+  "unpkg": "./dist/webgl-fluid.umd.js",
+  "jsdelivr": "./dist/webgl-fluid.umd.js",
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "serve": "vite preview",
+    "doc": "vitepress dev --open /README",
+    "release": "esno ./scripts/release.mts",
+    "preinstall": "node -e \"if (process.env.INIT_CWD === process.cwd()) { process.exit(1) }\" || npx only-allow pnpm",
+    "postinstall": "node -e \"if (process.env.INIT_CWD === process.cwd()) { process.exit(1) }\" || npx simple-git-hooks"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "latest",
+    "@commitlint/config-conventional": "latest",
+    "case-police": "latest",
+    "cross-spawn": "latest",
+    "del": "latest",
+    "esno": "latest",
+    "husky": "latest",
+    "kolorist": "latest",
+    "lint-staged": "latest",
+    "prompts": "latest",
+    "semver": "latest",
+    "simple-git-hooks": "latest",
+    "vite": "latest",
+    "vitepress": "latest"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npx --no -- commitlint --edit ${1}"
+  },
+  "lint-staged": {
+    "*.md": "case-police --fix"
+  }
+}
