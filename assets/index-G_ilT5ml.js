@@ -3,7 +3,7 @@ var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var require_index_001 = __commonJS({
-  "assets/index-gL3VWkpR.js"(exports, module) {
+  "assets/index-G_ilT5ml.js"(exports, module) {
     (function polyfill() {
       const relList = document.createElement("link").relList;
       if (relList && relList.supports && relList.supports("modulepreload")) {
@@ -1864,30 +1864,25 @@ var require_index_001 = __commonJS({
     JokerContainer.appendChild(presentationText);
     JokerContainer.appendChild(JokerLink);
     dt(loader, {
-      TRANSPARENT: true,
       IMMEDIATE: false,
-      TRIGGER: "click",
-      SIM_RESOLUTION: 64,
-      DYE_RESOLUTION: 512,
+      SIM_RESOLUTION: 128,
+      DYE_RESOLUTION: 1024,
       CAPTURE_RESOLUTION: 512,
       DENSITY_DISSIPATION: 1,
-      VELOCITY_DISSIPATION: 1,
-      PRESSURE: 1,
-      PRESSURE_ITERATIONS: 60,
-      CURL: 20,
+      VELOCITY_DISSIPATION: 0.2,
+      PRESSURE: 0.8,
+      PRESSURE_ITERATIONS: 20,
+      CURL: 30,
       SPLAT_RADIUS: 0.25,
-      SPLAT_FORCE: 1e4,
+      SPLAT_FORCE: 6e3,
       SHADING: true,
       COLORFUL: true,
       COLOR_UPDATE_SPEED: 10,
-      PAUSED: false,
-      BACK_COLOR: {
-        r: 0,
-        g: 0,
-        b: 0
-      },
+      PAUSED: true,
+      BACK_COLOR: { r: 0, g: 0, b: 0 },
+      TRANSPARENT: false,
       BLOOM: true,
-      BLOOM_ITERATIONS: 1,
+      BLOOM_ITERATIONS: 8,
       BLOOM_RESOLUTION: 256,
       BLOOM_INTENSITY: 0.8,
       BLOOM_THRESHOLD: 0.6,
@@ -22307,4 +22302,4 @@ var require_index_001 = __commonJS({
   }
 });
 export default require_index_001();
-//# sourceMappingURL=index-gL3VWkpR.js.map
+//# sourceMappingURL=index-G_ilT5ml.js.map
