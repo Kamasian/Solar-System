@@ -7,7 +7,7 @@ const JokerLink = document.createElement('a')
 const presentationText = document.createElement('p')
 
 presentationText.innerHTML = 'Solar Sytem </br></br> by </br></br>JokerDev'
-JokerPicture.src = '/assets/img/JokerDev.png'
+JokerPicture.src = '/assets/img/JokerDev.webp'
 JokerPicture.alt = 'Joker'
 JokerLink.href = 'https://github.com/Kamasian'
 JokerLink.target = '_blank'
