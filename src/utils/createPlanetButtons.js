@@ -13,22 +13,22 @@ export default async function createPlanetButtons() {
 
             const image1 = document.createElement('img')
             image1.classList.add('image1')
-            image1.src = '/assets/img/buttons/button-planet.png'
+            image1.src = '/assets/img/buttons/button-planet.webp'
             image1.alt = ''
 
             const image2 = document.createElement('img')
             image2.classList.add('image2')
-            image2.src = '/assets/img/buttons/button-ring.png'
+            image2.src = '/assets/img/buttons/button-ring.webp'
             image2.alt = ''
 
             const image3 = document.createElement('img')
             image3.classList.add('image3')
-            image3.src = '/assets/img/buttons/button-ring.png'
+            image3.src = '/assets/img/buttons/button-ring.webp'
             image3.alt = ''
 
             const image4 = document.createElement('img')
             image4.classList.add('image4')
-            image4.src = '/assets/img/buttons/button-ring.png'
+            image4.src = '/assets/img/buttons/button-ring.webp'
             image4.alt = ''
 
             const textElement = document.createElement('p')
